@@ -1,15 +1,19 @@
 NAME = ft_printf.a
+LIBFT = libft.a
 GCC = gcc -Wall -Werror -Wextra
+CASES = cases/printf_percentage.c
+SOURCES = sources/ft_printf.c
 
-OBJECTS = $(COMPULSORY:.c=.o)
-
+CASES_OBJECTS = $(CASES:.c=.o)
+SOURCE_OBJECTS = $(SOURCES:.c=.o)
+OBJECTS = $(CASES_OBJECTS) $(SOURCE_OBJECTS)
 
 all: $(NAME)
 
-
 $(NAME):
-		cd libft; make; cp libft.a ../sources/; cp libft.h ../sources
-		cd sources; $(GCC) ft_printf.c main.c
+		cd libft; make; cp libft.a ../; cp libft.h ../; make fclean
+		$(GCC) -c $(SOURCES) $(CASES) $(LIBFT)
+		ar rc $(NAME) $(OBJECTS)
 
 clean:
 

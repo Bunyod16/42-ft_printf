@@ -11,6 +11,24 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "stdio.h"
+
+int	detect_flags(obj *flags, const char *str, int i)
+{
+	if (str[i] == '%')
+	{
+		printf_percentage(flags);
+		return(i);
+	}
+	while(str[i] != 'c' && str[i] != 's' && str[i] != 'p' &&
+	str[i] != 'd' && str[i] != 'i' && str[i] != 'u' &&
+	str[i] != 'x' && str[i] != 'X' && str[i] != '%')
+	{
+		if (str[i] == '-')
+			flags->dash = 1;
+	}
+	return (i);
+}
 
 obj *set_to_zero(obj *ls)
 {
@@ -19,7 +37,7 @@ obj *set_to_zero(obj *ls)
 	ls->zero = 0;
 	ls->pnt = 0;
 	ls->dash = 0;
-	ls->tl = 0;
+	ls->count = 0;
 	ls->sign = 0;
 	ls->is_zero = 0;
 	ls->perc = 0;
@@ -30,14 +48,24 @@ obj *set_to_zero(obj *ls)
 int	ft_printf(const char *str, ...)
 {
 	obj *flags;
+	int i;
+	int count;
 
 	flags = (obj *)malloc(sizeof(obj));
 	if (!flags)
 		return (-1);
-	if (!ft_strchr(str,'%'))
+	count = 0;
+	i = -1;
+	while (str[++i])
 	{
-		str = (char *) str;
-		ft_putstr_fd(str, 0);
+		flags = set_to_zero(flags);
+		if (str[i] == '%')
+			i = detect_flags(flags, str, i + 1);
+		else
+			count += write(0, &str[i], 1);
+		count += flags->count;
 	}
-	flags = set_to_zero(flags);
+	va_end(flags->args);
+	free (flags);
+	return (count);
 }

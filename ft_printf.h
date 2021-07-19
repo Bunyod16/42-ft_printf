@@ -8,15 +8,17 @@ int	ft_printf(const char *str, ...);
 typedef struct a_struct
 {
 	va_list	args;
-	int	wdt;
+	int sign;
 	int	prc;
-	int zero;
 	int	pnt;
 	int	dash;
-	int tl;
-	int sign;
+	int count;
+	int	wdt;
 	int	is_zero;
 	int	perc;
+	int zero;
 	int	sp;
 }	obj;
+
+void	printf_percentage(obj *flags);
 # endif
