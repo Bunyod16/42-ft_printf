@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 #include "stdio.h"
 
 int	detect_flags(obj *flags, const char *str, int i)
@@ -27,8 +27,15 @@ int	detect_flags(obj *flags, const char *str, int i)
 		if (str[i] == '-')
 			flags->dash = 1;
 	}
+	// process_specifier(flags, str, i);
 	return (i);
 }
+
+// void process_specifier(obj *flags, const char *str, int i)
+// {
+// 	if (str[i] == 'c')
+// 		return ;
+// }
 
 obj *set_to_zero(obj *ls)
 {

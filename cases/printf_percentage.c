@@ -1,4 +1,4 @@
-#include "../sources/ft_printf.h"
+#include "../ft_printf.h"
 
 void	printf_percentage(obj *flags)
 {
