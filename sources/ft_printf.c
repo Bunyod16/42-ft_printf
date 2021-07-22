@@ -15,18 +15,25 @@
 
 int	detect_flags(obj *flags, const char *str, int i)
 {
-	if (str[i] == '%')
-	{
-		printf_percentage(flags);
-		return(i);
-	}
 	while(str[i] != 'c' && str[i] != 's' && str[i] != 'p' &&
 	str[i] != 'd' && str[i] != 'i' && str[i] != 'u' &&
 	str[i] != 'x' && str[i] != 'X' && str[i] != '%')
 	{
 		if (str[i] == '-')
 			flags->dash = 1;
+		if (str[i] == ' ')
+			flags->sp = 1;
+		if (ft_isnum(str[i]))
+			flags->wdt = 1;
+		if (str[i] == '0')
+			flags->zero = 1;
+		if (str[i] == '.')
+			flags->prc = 1;
+		if (str[i] == '+')
+			flags->sign = 1;
 	}
+	if (str[i] == '%')
+		printf_percentage(flags);
 	// process_specifier(flags, str, i);
 	return (i);
 }
@@ -47,7 +54,6 @@ obj *set_to_zero(obj *ls)
 	ls->count = 0;
 	ls->sign = 0;
 	ls->is_zero = 0;
-	ls->perc = 0;
 	ls->sp = 0;
 	return (ls);
 }

@@ -4,27 +4,29 @@ GCC = gcc -Wall -Werror -Wextra
 CASES = printf_percentage.c
 SOURCES = ft_printf.c
 
+CASES_PATH = $(addprefix cases/, $(CASES))
+SOURCES_PATH = $(addprefix sources/, $(SOURCES))
+
 CASES_OBJECTS = $(CASES:.c=.o)
 SOURCES_OBJECTS = $(SOURCES:.c=.o)
 
-CASES_OBJECTS_PATH = $(addprefix cases/, $(CASES_OBJECTS)))
-SOURCE_OBJECTS_PATH = $(addprefix sources/, $(SOURCES_OBJECTS)))
-OBJECTS = $(CASES_OBJECTS_PATH) $(SOURCE_OBJECTS_PATH)
+# OBJECTS = $(CASES:.c=.o) $(SOURCE:.c=.o)
 
 all: $(NAME)
 
 $(NAME):
-		cd libft; make; cp libft.a ../$(NAME); cp libft.h ../; make clean
-		$(GCC) -c $(SOURCE_OBJECTS_PATH) $(CASES_OBJECTS_PATH) $(LIBFT)
-		ar rc $(NAME) $(OBJECTS)
+		cd libft; make re; cp libft.a ../$(NAME); make clean
+		$(GCC) -c $(SOURCES_PATH) $(CASES_PATH)
+		ar r $(NAME) $(CASES_OBJECTS) $(SOURCES_OBJECTS)
 
 clean:
-	rm -rf $(CASES_OBJECTS) $(SOURCES_OBJECTS) $(LIBFT) $(LIBFT:.a=.h)
+	rm -rf $(CASES_OBJECTS) $(SOURCES_OBJECTS)
 
-re:
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean all
 
 bonus:
 
-fclean:
-
-re:
+.PHONY: all bonus clean fclean re

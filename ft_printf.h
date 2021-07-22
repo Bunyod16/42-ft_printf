@@ -1,9 +1,10 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-int	ft_printf(const char *str, ...);
 #include <stdarg.h>
 #include "libft.h"
+
+int	ft_printf(const char *str, ...);
 
 typedef struct a_struct
 {
@@ -15,7 +16,6 @@ typedef struct a_struct
 	int count;
 	int	wdt;
 	int	is_zero;
-	int	perc;
 	int zero;
 	int	sp;
 }	obj;

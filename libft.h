@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bshamsid <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 12:50:05 by bshamsid          #+#    #+#             */
-/*   Updated: 2021/05/20 15:53:43 by bshamsid         ###   ########.fr       */
+/*   Updated: 2021/07/21 13:43:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,5 @@ char			*ft_strtrim(const char *s1, const char *s2);
 char			**ft_split(const char *s, char c);
 char			*ft_itoa(int n);
 char			*ft_strmapi(const char *s, char (*f)(unsigned int, char));
+int				ft_isnum(int i);
 #endif
