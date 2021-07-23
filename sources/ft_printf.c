@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
-#include "stdio.h"
+#include "../libftprintf.h"
 
-
-void process_specifier(obj *flags, const char *str, int i)
+static void process_specifier(obj *flags, const char *str, int i)
 {
+	if (str[i] == '%')
+		printf_percentage(flags);
 	if (str[i] == 'c')
-		printf_char(flags);
+		process_char(flags);
 }
 
-int	detect_flags(obj *flags, const char *str, int i)
+static int	detect_flags(obj *flags, const char *str, int i)
 {
 	while(str[i] != 'c' && str[i] != 's' && str[i] != 'p' &&
 	str[i] != 'd' && str[i] != 'i' && str[i] != 'u' &&
@@ -30,23 +30,21 @@ int	detect_flags(obj *flags, const char *str, int i)
 			flags->dash = 1;
 		if (str[i] == ' ')
 			flags->sp = 1;
-		if (ft_isnum(str[i]))
-			flags->wdt = 1;
+		if (ft_isnum(str[i]) && flags->prc == 0)
+			flags->wdt = (flags->wdt*10) + str[i] - 48;
 		if (str[i] == '0')
 			flags->zero = 1;
-		if (str[i] == '.')
-			flags->prc = 1;
 		if (str[i] == '+')
 			flags->sign = 1;
+		if (str[i] == '.')
+			flags->prc = 1;
 		i++;
 	}
-	if (str[i] == '%')
-		printf_percentage(flags);
 	process_specifier(flags, str, i);
 	return (i);
 }
 
-obj *set_to_zero(obj *ls)
+static obj *set_to_zero(obj *ls)
 {
 	ls->wdt = 0;
 	ls->prc = 0;

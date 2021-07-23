@@ -1,5 +1,5 @@
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
 #include <stdarg.h>
 #include "libft.h"
@@ -21,5 +21,8 @@ typedef struct a_struct
 }	obj;
 
 void	printf_percentage(obj *flags);
+void    process_char(obj *flags);
 void	printf_char(obj *flags);
+void    printf_char_wdt(obj *flags);
+void	printf_char_wdt_dash(obj *flags);
 # endif
