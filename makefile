@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 LIBFT = libft.a
 GCC = gcc -Wall -Werror -Wextra
-CASES = printf_percentage.c
+CASES = printf_percentage.c printf_char.c
 SOURCES = ft_printf.c
 
 CASES_PATH = $(addprefix cases/, $(CASES))

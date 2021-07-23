@@ -21,4 +21,5 @@ typedef struct a_struct
 }	obj;
 
 void	printf_percentage(obj *flags);
+void	printf_char(obj *flags);
 # endif
