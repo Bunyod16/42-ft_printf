@@ -1,4 +1,4 @@
-#include "../libftprintf.h"
+#include "../ft_printf.h"
 
 void    process_char(obj *flags)
 {
