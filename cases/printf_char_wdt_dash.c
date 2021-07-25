@@ -12,5 +12,6 @@ void printf_char_wdt_dash(obj *flags)
     while(wdt-- > 1)
     {
         ft_putchar_fd(' ', 0);
+        flags->count += 1;
     }
 }

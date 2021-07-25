@@ -11,13 +11,17 @@
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-
+#include <stdio.h>
 static void process_specifier(obj *flags, const char *str, int i)
 {
 	if (str[i] == '%')
 		printf_percentage(flags);
 	if (str[i] == 'c')
 		process_char(flags);
+	if (str[i] == 's')
+		process_str(flags);
+	if (str[i] == 'p')
+		process_ptr(flags);
 }
 
 static int	detect_flags(obj *flags, const char *str, int i)
@@ -76,7 +80,9 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 			i = detect_flags(flags, str, i + 1);
 		else
-			count += write(0, &str[i], 1);
+		{
+			count += write(1, &str[i], 1);
+		}
 		count += flags->count;
 	}
 	va_end(flags->args);

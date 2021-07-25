@@ -6,5 +6,5 @@ void	printf_char(obj *flags)
 	
 	c = va_arg(flags->args, int);
 	flags->count += 1;
-	write(0, &c, 1);
+	write(1, &c, 1);
 }

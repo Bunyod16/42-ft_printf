@@ -25,4 +25,8 @@ void    process_char(obj *flags);
 void	printf_char(obj *flags);
 void    printf_char_wdt(obj *flags);
 void	printf_char_wdt_dash(obj *flags);
+void    process_str(obj *flags);
+void	printf_str(obj *flags);
+void	process_ptr(obj *flags);
+void	printf_ptr(obj *flags);
 # endif
