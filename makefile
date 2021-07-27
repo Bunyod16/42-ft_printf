@@ -21,6 +21,9 @@ SOURCES_PATH = $(addprefix sources/, $(SOURCES))
 CASES_OBJECTS = $(CASES:.c=.o)
 SOURCES_OBJECTS = $(SOURCES:.c=.o)
 
+#Add a default flag to not print directories entered
+MAKEFLAGS += --no-print-directory
+
 # OBJECTS = $(CASES:.c=.o) $(SOURCE:.c=.o)
 GREEN=\033[32m
 END=\033[0m

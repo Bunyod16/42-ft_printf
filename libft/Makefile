@@ -47,7 +47,7 @@ BONUS =	ft_lstnew.c \
 
 BONUSOBJECTS = $(BONUS:.c=.o)
 COMPOBJECTS = $(COMPULSORY:.c=.o)
-
+MAKEFLAGS += --no-print-directory
 all: $(NAME)
 
 $(NAME):
