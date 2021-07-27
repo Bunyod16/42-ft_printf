@@ -51,18 +51,19 @@ COMPOBJECTS = $(COMPULSORY:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	$(GCC) -c $(COMPULSORY) 
-	ar rc $(NAME) $(COMPOBJECTS)
+	@$(GCC) -c $(COMPULSORY) 
+	@ar rc $(NAME) $(COMPOBJECTS)
+
 
 bonus: $(NAME)
-	$(GCC) -c $(BONUS) $(BONUS) $(COMPULSORY)
-	ar rc $(NAME) $(BONUSOBJECTS) $(COMPOBJECTS)
+	@$(GCC) -c $(BONUS) $(BONUS) $(COMPULSORY)
+	@ar rc $(NAME) $(BONUSOBJECTS) $(COMPOBJECTS)
 
 clean:
-	rm -rf $(COMPOBJECTS) $(BONUSOBJECTS)
+	@rm -rf $(COMPOBJECTS) $(BONUSOBJECTS)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 

@@ -22,6 +22,8 @@ static void process_specifier(obj *flags, const char *str, int i)
 		process_str(flags);
 	if (str[i] == 'p')
 		process_ptr(flags);
+	if (str[i] == 'p')
+		process_int(flags);
 }
 
 static int	detect_flags(obj *flags, const char *str, int i)

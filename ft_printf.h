@@ -29,4 +29,6 @@ void    process_str(obj *flags);
 void	printf_str(obj *flags);
 void	process_ptr(obj *flags);
 void	printf_ptr(obj *flags);
+void	process_int(obj *flags);
+void	printf_int(obj *flags);
 # endif

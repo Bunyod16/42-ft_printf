@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 LIBFT = libft.a
-GCC = gcc#-Wall -Wextra -Werror
+GCC = gcc -Wall -Wextra -Werror
 CASES = printf_percentage.c \
 						printf_char.c \
 						printf_char_wdt.c \
@@ -10,6 +10,8 @@ CASES = printf_percentage.c \
 						printf_str.c \
 						process_ptr.c \
 						printf_ptr.c \
+						process_int.c \
+						printf_int.c
 
 SOURCES = ft_printf.c
 
@@ -20,19 +22,24 @@ CASES_OBJECTS = $(CASES:.c=.o)
 SOURCES_OBJECTS = $(SOURCES:.c=.o)
 
 # OBJECTS = $(CASES:.c=.o) $(SOURCE:.c=.o)
-
+GREEN=\033[32m
+END=\033[0m
 all: $(NAME)
 
 $(NAME):
-		cd libft; make re; cp libft.a ../$(NAME); make clean
-		$(GCC) -c $(SOURCES_PATH) $(CASES_PATH)
-		ar r $(NAME) $(CASES_OBJECTS) $(SOURCES_OBJECTS)
+		@echo "$(GREEN)Making libft$(END)"
+		@cd libft; make re; cp libft.a ../$(NAME); make clean
+		@echo "$(GREEN)Creating object files$(END)"
+		@$(GCC) -c $(SOURCES_PATH) $(CASES_PATH)
+		@echo "$(GREEN)Compiling the library$(END)"
+		@ar r $(NAME) $(CASES_OBJECTS) $(SOURCES_OBJECTS)
 
 clean:
-	rm -rf $(CASES_OBJECTS) $(SOURCES_OBJECTS)
+	@echo "$(GREEN)Cleaning$(END)"
+	@rm -rf $(CASES_OBJECTS) $(SOURCES_OBJECTS)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 
