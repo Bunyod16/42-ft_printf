@@ -23,6 +23,8 @@ static void process_specifier(obj *flags, const char *str, int i)
 	if (str[i] == 'p')
 		process_ptr(flags);
 	if (str[i] == 'd')
+		process_dec(flags);
+	if (str[i] == 'i')
 		process_int(flags);
 }
 
