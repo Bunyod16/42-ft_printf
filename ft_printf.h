@@ -31,4 +31,13 @@ void	process_ptr(obj *flags);
 void	printf_ptr(obj *flags);
 void	process_dec(obj *flags);
 void	printf_dec(obj *flags);
+void	process_int(obj *flags);
+void	printf_int(obj *flags);
+void	process_u(obj *flags);
+void	printf_u(obj *flags);
+char	*ft_rev(char *str);
+char	*to_hex(unsigned long long num);
+void	process_x(obj *flags, char c);
+void	printf_xl(obj *flags);
+void	printf_xu(obj *flags);
 # endif

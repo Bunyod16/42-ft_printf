@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-#include <stdio.h>
+
 static void process_specifier(obj *flags, const char *str, int i)
 {
 	if (str[i] == '%')
@@ -26,6 +26,10 @@ static void process_specifier(obj *flags, const char *str, int i)
 		process_dec(flags);
 	if (str[i] == 'i')
 		process_int(flags);
+	if (str[i] == 'u')
+		process_u(flags);
+	if (str[i] == 'x' || str[i] == 'X')
+		process_x(flags, str[i]);
 }
 
 static int	detect_flags(obj *flags, const char *str, int i)

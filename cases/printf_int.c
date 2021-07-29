@@ -1,14 +1,17 @@
 #include "../ft_printf.h"
 
-void	printf_dec(obj* flags)
+void	printf_int(obj* flags)
 {
-	int num;
-	char *rep;
+	int num;;
 
 	num = va_arg(flags->args, int);
-    rep = ft_itao(num);
-	if (rep[0] == 0)
-    {
-        if (rep[1] == x)
-    }
+	ft_putnbr_fd(num, 1);
+	flags->count += 1;
+	if (num < 0)
+		flags->count += 1;
+	while (num >= 10 || num <= -10)
+	{
+		num /= 10;
+		flags->count += 1;
+	}
 }
