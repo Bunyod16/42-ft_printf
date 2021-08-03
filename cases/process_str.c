@@ -1,7 +1,31 @@
 #include "../ft_printf.h"
 
-void    process_str(obj *flags)
+static void	count_space_prc(t_obj *flags, int *space, char *str)
 {
-    if (!flags->wdt && !flags->dash)
-		printf_str(flags);
+	*space = 0;
+	if (!flags->prc && flags->pnt)
+		flags->prc = 0;
+	else if (!flags->prc || flags->prc > (int) ft_strlen(str))
+		flags->prc = ft_strlen(str);
+	if (flags->wdt > flags->prc)
+		*space = flags->wdt - flags->prc;
+}
+
+void	process_str(t_obj *flags)
+{
+	const char	*str = va_arg(flags->args, char *);
+	int			space;
+
+	count_space_prc(flags, &space, (char *) str);
+	if (flags->dash)
+	{
+		write(1, str, flags->prc);
+		ft_putnchar_fd(' ', space, 1);
+	}
+	else
+	{
+		ft_putnchar_fd(' ', space, 1);
+		write(1, str, flags->prc);
+	}
+	flags->count += flags->prc + space;
 }

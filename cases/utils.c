@@ -1,10 +1,10 @@
 #include "../ft_printf.h"
 
-char *ft_rev(char *str)
+char	*ft_rev(char *str)
 {
-	int len;
-	char *ret;
-	int i;
+	int		len;
+	char	*ret;
+	int		i;
 
 	len = ft_strlen(str) - 1;
 	ret = malloc(len + 2);
@@ -21,8 +21,8 @@ char *ft_rev(char *str)
 
 char	*to_hex(unsigned long long num)
 {
-	char ret[1024];
-	int i;
+	char	ret[1024];
+	int		i;
 
 	i = 0;
 	while (num > 0)
@@ -35,4 +35,10 @@ char	*to_hex(unsigned long long num)
 	}
 	ret[i] = 0;
 	return (ft_rev(ret));
+}
+
+void	ft_putnchar_fd(char c, int n, int fd)
+{
+	while (n--)
+		write(fd, &c, 1);
 }

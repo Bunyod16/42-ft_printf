@@ -1,7 +1,17 @@
 #include "../ft_printf.h"
 
-void    process_int(obj *flags)
+void	process_int(t_obj *flags)
 {
-    if (!flags->wdt && !flags->dash)
-		printf_int(flags);
+	int	num;
+
+	num = va_arg(flags->args, int);
+	ft_putnbr_fd(num, 1);
+	flags->count += 1;
+	if (num < 0)
+		flags->count += 1;
+	while (num >= 10 || num <= -10)
+	{
+		num /= 10;
+		flags->count += 1;
+	}
 }

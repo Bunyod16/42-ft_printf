@@ -1,21 +1,12 @@
 NAME = libftprintf.a
 LIBFT = libft.a
 GCC = gcc -Wall -Wextra -Werror
-CASES = printf_percentage.c \
-						printf_char.c \
-						printf_char_wdt.c \
-						process_char.c \
-						printf_char_wdt_dash.c \
+CASES =		process_char.c \
 						process_str.c \
-						printf_str.c \
 						process_ptr.c \
-						printf_ptr.c \
 						process_dec.c \
-						printf_dec.c \
 						process_int.c \
-						printf_int.c \
 						process_u.c \
-						printf_u.c \
 						utils.c \
 						process_x.c \
 						printf_xl.c \

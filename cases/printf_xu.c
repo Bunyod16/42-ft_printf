@@ -3,8 +3,8 @@
 
 static char	*to_hex2(long long num)
 {
-	char ret[1024];
-	int i;
+	char	ret[1024];
+	int		i;
 
 	i = 0;
 	while (num > 0)
@@ -19,10 +19,10 @@ static char	*to_hex2(long long num)
 	return (ft_rev(ret));
 }
 
-void	printf_xu(obj* flags)
+void	printf_xu(t_obj *flags)
 {
 	long long	num;
-	char *hex;
+	char		*hex;
 
 	num = va_arg(flags->args, int);
 	if (num == 0)
@@ -31,7 +31,7 @@ void	printf_xu(obj* flags)
 		flags->count += 1;
 		return ;
 	}
-	if (num < 0)	
+	if (num < 0)
 		num = UINT_MAX + num + 1;
 	hex = to_hex2(num);
 	ft_putstr_fd(hex, 1);

@@ -1,7 +1,25 @@
 #include "../ft_printf.h"
 
-void    process_u(obj *flags)
+static void	ft_putnbr_fd_long(unsigned int num, int fd)
 {
-    if (!flags->wdt && !flags->dash)
-		printf_u(flags);
+	char			c;
+
+	if (num >= 10)
+		ft_putnbr_fd_long(num / 10, fd);
+	c = num % 10 + '0';
+	write(fd, &c, 1);
+}
+
+void	process_u(t_obj *flags)
+{
+	unsigned int	num;
+
+	num = va_arg(flags->args, unsigned int);
+	ft_putnbr_fd_long(num, 1);
+	flags->count += 1;
+	while (num >= 10)
+	{
+		num /= 10;
+		flags->count += 1;
+	}
 }

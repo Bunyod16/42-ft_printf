@@ -11,11 +11,10 @@
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+#include <stdio.h>
 
-static void process_specifier(obj *flags, const char *str, int i)
+static void process_specifier(t_obj *flags, const char *str, int i)
 {
-	if (str[i] == '%')
-		printf_percentage(flags);
 	if (str[i] == 'c')
 		process_char(flags);
 	if (str[i] == 's')
@@ -30,9 +29,14 @@ static void process_specifier(obj *flags, const char *str, int i)
 		process_u(flags);
 	if (str[i] == 'x' || str[i] == 'X')
 		process_x(flags, str[i]);
+	if (str[i] == '%')
+	{
+		ft_putchar_fd('%', 1);
+		flags->count += 1;
+	}
 }
 
-static int	detect_flags(obj *flags, const char *str, int i)
+static int	detect_flags(t_obj *flags, const char *str, int i)
 {
 	while(str[i] != 'c' && str[i] != 's' && str[i] != 'p' &&
 	str[i] != 'd' && str[i] != 'i' && str[i] != 'u' &&
@@ -42,21 +46,26 @@ static int	detect_flags(obj *flags, const char *str, int i)
 			flags->dash = 1;
 		if (str[i] == ' ')
 			flags->sp = 1;
-		if (ft_isnum(str[i]) && flags->prc == 0)
-			flags->wdt = (flags->wdt*10) + str[i] - 48;
-		if (str[i] == '0')
+		if (ft_isnum(str[i]))
+		{
+			if (flags->prc == 0 && str[i - 1] != '.')
+				flags->wdt = (flags->wdt*10) + str[i] - 48;
+			else
+				flags->prc = (flags->prc * 10) + str[i] - 48; 
+		}
+		if (str[i] == '0' && flags->wdt == 0)
 			flags->zero = 1;
 		if (str[i] == '+')
 			flags->sign = 1;
 		if (str[i] == '.')
-			flags->prc = 1;
+			flags->pnt = 1;
 		i++;
 	}
 	process_specifier(flags, str, i);
 	return (i);
 }
 
-static obj *set_to_zero(obj *ls)
+static t_obj *set_to_zero(t_obj *ls)
 {
 	ls->wdt = 0;
 	ls->prc = 0;
@@ -72,14 +81,14 @@ static obj *set_to_zero(obj *ls)
 
 int	ft_printf(const char *str, ...)
 {
-	obj *flags;
+	t_obj *flags;
 	int i;
 	int count;
 
-	flags = (obj *)malloc(sizeof(obj));
+	count = 0;
+	flags = (t_obj *)malloc(sizeof(t_obj));
 	if (!flags)
 		return (-1);
-	count = 0;
 	i = -1;
 	va_start(flags->args, str);
 	while (str[++i])
