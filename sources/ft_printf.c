@@ -36,32 +36,28 @@ static void process_specifier(t_obj *flags, const char *str, int i)
 	}
 }
 
-static int	detect_flags(t_obj *flags, const char *str, int i)
+static int	detect_flags(t_obj *flags, const char *s, int i)
 {
-	while(str[i] != 'c' && str[i] != 's' && str[i] != 'p' &&
-	str[i] != 'd' && str[i] != 'i' && str[i] != 'u' &&
-	str[i] != 'x' && str[i] != 'X' && str[i] != '%')
+	while(s[i] != 'c' && s[i] != 's' && s[i] != 'p' && s[i] != 'd' &&
+	s[i] != 'i' && s[i] != 'u' && s[i] != 'x' && s[i] != 'X' && s[i] != '%')
 	{
-		if (str[i] == '-')
+		if (s[i] == '-')
 			flags->dash = 1;
-		if (str[i] == ' ')
+		if (s[i] == ' ')
 			flags->sp = 1;
-		if (ft_isnum(str[i]))
-		{
-			if (flags->prc == 0 && str[i - 1] != '.')
-				flags->wdt = (flags->wdt*10) + str[i] - 48;
-			else
-				flags->prc = (flags->prc * 10) + str[i] - 48; 
-		}
-		if (str[i] == '0' && flags->wdt == 0)
+		if (ft_isnum(s[i]) && flags->prc == 0 && s[i - 1] != '.')
+			flags->wdt = (flags->wdt*10) + s[i] - 48;
+		else if (ft_isnum(s[i]) && flags->pnt)
+			flags->prc = (flags->prc * 10) + s[i] - 48; 
+		if (s[i] == '0' && flags->wdt == 0 && !flags->dash && !flags->prc)
 			flags->zero = 1;
-		if (str[i] == '+')
+		if (s[i] == '+')
 			flags->sign = 1;
-		if (str[i] == '.')
+		if (s[i] == '.')
 			flags->pnt = 1;
-		i++;
+		i++;		
 	}
-	process_specifier(flags, str, i);
+	process_specifier(flags, s, i);
 	return (i);
 }
 
@@ -74,7 +70,6 @@ static t_obj *set_to_zero(t_obj *ls)
 	ls->dash = 0;
 	ls->count = 0;
 	ls->sign = 0;
-	ls->is_zero = 0;
 	ls->sp = 0;
 	return (ls);
 }

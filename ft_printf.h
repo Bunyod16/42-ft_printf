@@ -12,9 +12,8 @@ typedef struct s_struct
 	int		dash;
 	int		count;
 	int		wdt;
-	int		is_zero;
-	int		zero;
 	int		sp;
+	int		zero;
 }	t_obj;
 
 int		ft_printf(const char *str, ...);

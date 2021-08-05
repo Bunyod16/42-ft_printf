@@ -39,6 +39,6 @@ char	*to_hex(unsigned long long num)
 
 void	ft_putnchar_fd(char c, int n, int fd)
 {
-	while (n--)
+	while (n-- > 0)
 		write(fd, &c, 1);
 }
