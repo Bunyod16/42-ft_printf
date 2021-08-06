@@ -8,8 +8,6 @@ CASES =		process_char.c \
 						process_u.c \
 						utils.c \
 						process_x.c \
-						printf_xl.c \
-						printf_xu.c \
 						utils_itoa_long.c
 
 SOURCES = ft_printf.c

@@ -28,7 +28,7 @@ static void process_specifier(t_obj *flags, const char *str, int i)
 	if (str[i] == 'u')
 		process_u(flags);
 	if (str[i] == 'x' || str[i] == 'X')
-		process_x(flags, str[i]);
+		process_x(flags);
 	if (str[i] == '%')
 	{
 		ft_putchar_fd('%', 1);
@@ -55,8 +55,12 @@ static int	detect_flags(t_obj *flags, const char *s, int i)
 			flags->sign = 1;
 		if (s[i] == '.')
 			flags->pnt = 1;
+		if (s[i] == '#')
+			flags->hash = 2;
 		i++;		
 	}
+	if (s[i] == 'X')
+		flags->big_x = 1;
 	process_specifier(flags, s, i);
 	return (i);
 }
@@ -71,6 +75,8 @@ static t_obj *set_to_zero(t_obj *ls)
 	ls->count = 0;
 	ls->sign = 0;
 	ls->sp = 0;
+	ls->big_x = 0;
+	ls->hash = 0;
 	return (ls);
 }
 
