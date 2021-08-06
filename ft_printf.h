@@ -26,7 +26,7 @@ void	process_ptr(t_obj *flags);
 void	printf_ptr(t_obj *flags);
 void	process_dec(t_obj *flags);
 void	printf_dec(t_obj *flags);
-void	process_int(t_obj *flags);
+void	ft_putnbr_fd_long(unsigned int num, int fd);
 void	process_u(t_obj *flags);
 char	*ft_rev(char *str);
 char	*to_hex(unsigned long long num);
@@ -34,4 +34,5 @@ void	process_x(t_obj *flags, char c);
 void	printf_xl(t_obj *flags);
 void	printf_xu(t_obj *flags);
 void	ft_putnchar_fd(char c, int n, int fd);
+char	*ft_long_itoa(long long num);
 #endif

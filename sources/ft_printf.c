@@ -24,7 +24,7 @@ static void process_specifier(t_obj *flags, const char *str, int i)
 	if (str[i] == 'd')
 		process_dec(flags);
 	if (str[i] == 'i')
-		process_int(flags);
+		process_dec(flags);
 	if (str[i] == 'u')
 		process_u(flags);
 	if (str[i] == 'x' || str[i] == 'X')

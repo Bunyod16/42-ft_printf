@@ -5,12 +5,12 @@ CASES =		process_char.c \
 						process_str.c \
 						process_ptr.c \
 						process_dec.c \
-						process_int.c \
 						process_u.c \
 						utils.c \
 						process_x.c \
 						printf_xl.c \
-						printf_xu.c
+						printf_xu.c \
+						utils_itoa_long.c
 
 SOURCES = ft_printf.c
 
