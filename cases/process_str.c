@@ -16,6 +16,12 @@ void	process_str(t_obj *flags)
 	const char	*str = va_arg(flags->args, char *);
 	int			space;
 
+	if (!str)
+	{
+		ft_putstr_fd("(null)", 1);
+		flags->count += 6;
+		return ;
+	}
 	count_space_prc(flags, &space, (char *) str);
 	if (flags->dash)
 	{

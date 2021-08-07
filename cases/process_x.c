@@ -8,7 +8,7 @@ static void	count_space_prc(t_obj *flags, char *num)
 	int	len;
 
 	len = (int) ft_strlen(num);
-	abs_len =  (int) ft_strlen(num);
+	abs_len = (int) ft_strlen(num);
 	if (num[0] == '-')
 		abs_len -= 1;
 	if (abs_len >= flags->prc)
@@ -25,13 +25,8 @@ static void	count_space_prc(t_obj *flags, char *num)
 		flags->prc = 0;
 }
 
-static void	printf_x(t_obj *flags, char *s_num)
+static void	printf_x(t_obj *flags, char *s_num, char *prefix)
 {
-	char	*hash;
-
-	hash = "0x";
-	if (flags->big_x)
-		hash = "0X";
 	if (flags->zero)
 	{
 		ft_putnchar_fd('0', flags->wdt, 1);
@@ -41,7 +36,7 @@ static void	printf_x(t_obj *flags, char *s_num)
 	if (flags->dash)
 	{
 		if (flags->hash)
-			ft_putstr_fd(hash, 1);
+			ft_putstr_fd(prefix, 1);
 		ft_putnchar_fd('0', flags->prc, 1);
 		ft_putstr_fd(s_num, 1);
 		ft_putnchar_fd(' ', flags->wdt, 1);
@@ -50,8 +45,8 @@ static void	printf_x(t_obj *flags, char *s_num)
 	{
 		ft_putnchar_fd(' ', flags->wdt, 1);
 		if (flags->hash)
-			ft_putstr_fd(hash, 1);
-		ft_putnchar_fd('0', flags->prc, 1);	
+			ft_putstr_fd(prefix, 1);
+		ft_putnchar_fd('0', flags->prc, 1);
 		ft_putstr_fd(s_num, 1);
 	}	
 }
@@ -67,7 +62,7 @@ static char	*to_hex2(long long num, t_obj *flags)
 	if (!flags->big_x)
 		offset = 87;
 	else
-		offset = 55; 
+		offset = 55;
 	i = 0;
 	while (num > 0)
 	{
@@ -85,8 +80,9 @@ void	process_x(t_obj *flags)
 {
 	long long	num;
 	char		*hex;
+	char		*prefix;
 
-
+	prefix = "0x";
 	num = va_arg(flags->args, int);
 	if (num < 0)
 		num = UINT_MAX + num + 1;
@@ -99,9 +95,11 @@ void	process_x(t_obj *flags)
 	}
 	else
 	{
-		printf_x(flags, hex);
-		flags->count += ft_strlen(hex) + flags->wdt + flags->prc +
-		+ flags->sign + flags->sp + flags->hash;
+		if (flags->big_x)
+			prefix = "0X";
+		printf_x(flags, hex, prefix);
+		flags->count += ft_strlen(hex) + flags->wdt + flags->prc
+			+ flags->sign + flags->sp + flags->hash;
 	}
 	free(hex);
 }

@@ -6,7 +6,7 @@ static void	count_space_prc(t_obj *flags, char *num)
 	int	len;
 
 	len = (int) ft_strlen(num);
-	abs_len =  (int) ft_strlen(num);
+	abs_len = (int) ft_strlen(num);
 	if (num[0] == '-')
 		abs_len -= 1;
 	if (abs_len >= flags->prc)
@@ -23,12 +23,17 @@ static void	count_space_prc(t_obj *flags, char *num)
 		flags->prc = 0;
 }
 
-static void	process_uint(t_obj *flags, char *s_num)
+static void	process_sp_sign(t_obj *flags)
 {
 	if (flags->sp)
 		ft_putchar_fd(' ', 1);
 	if (flags->sign)
 		ft_putchar_fd('+', 1);
+}
+
+static void	process_uint(t_obj *flags, char *s_num)
+{
+	process_sp_sign(flags);
 	if (flags->zero)
 	{
 		ft_putnchar_fd('0', flags->wdt, 1);
@@ -49,8 +54,8 @@ static void	process_uint(t_obj *flags, char *s_num)
 			ft_putstr_fd(s_num, 1);
 		}
 	}
-	flags->count += ft_strlen(&s_num[0]) + flags->wdt + flags->prc +
-	+ flags->sign + flags->sp;
+	flags->count += ft_strlen(&s_num[0]) + flags->wdt + flags->prc
+		+ flags->sign + flags->sp;
 }
 
 void	process_u(t_obj *flags)
@@ -64,5 +69,3 @@ void	process_u(t_obj *flags)
 	process_uint(flags, s_num);
 	free(s_num);
 }
-
-

@@ -31,7 +31,7 @@ char	*ft_long_itoa(long long n)
 {
 	char			*ret;
 	int				x;
-	long long	copy;
+	long long		copy;
 	int				len;
 
 	len = 1 + count_len(n / 10);

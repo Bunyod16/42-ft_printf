@@ -9,11 +9,9 @@
 /*   Updated: 2021/07/13 01:26:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../ft_printf.h"
-#include <stdio.h>
 
-static void process_specifier(t_obj *flags, const char *str, int i)
+static void	process_specifier(t_obj *flags, const char *str, int i)
 {
 	if (str[i] == 'c')
 		process_char(flags);
@@ -21,9 +19,7 @@ static void process_specifier(t_obj *flags, const char *str, int i)
 		process_str(flags);
 	if (str[i] == 'p')
 		process_ptr(flags);
-	if (str[i] == 'd')
-		process_dec(flags);
-	if (str[i] == 'i')
+	if (str[i] == 'd' || str[i] == 'i')
 		process_dec(flags);
 	if (str[i] == 'u')
 		process_u(flags);
@@ -36,19 +32,30 @@ static void process_specifier(t_obj *flags, const char *str, int i)
 	}
 }
 
+static int	detect_specifier(char c)
+{
+	static char	*specifiers = "cspdiuxX%";
+	int			i;
+
+	i = 0;
+	while (specifiers[i])
+		if (specifiers[i++] == c)
+			return (1);
+	return (0);
+}
+
 static int	detect_flags(t_obj *flags, const char *s, int i)
 {
-	while(s[i] != 'c' && s[i] != 's' && s[i] != 'p' && s[i] != 'd' &&
-	s[i] != 'i' && s[i] != 'u' && s[i] != 'x' && s[i] != 'X' && s[i] != '%')
+	while (!detect_specifier(s[i]))
 	{
 		if (s[i] == '-')
 			flags->dash = 1;
 		if (s[i] == ' ')
 			flags->sp = 1;
 		if (ft_isnum(s[i]) && flags->prc == 0 && s[i - 1] != '.')
-			flags->wdt = (flags->wdt*10) + s[i] - 48;
+			flags->wdt = (flags->wdt * 10) + s[i] - 48;
 		else if (ft_isnum(s[i]) && flags->pnt)
-			flags->prc = (flags->prc * 10) + s[i] - 48; 
+			flags->prc = (flags->prc * 10) + s[i] - 48;
 		if (s[i] == '0' && flags->wdt == 0 && !flags->dash && !flags->prc)
 			flags->zero = 1;
 		if (s[i] == '+')
@@ -57,7 +64,7 @@ static int	detect_flags(t_obj *flags, const char *s, int i)
 			flags->pnt = 1;
 		if (s[i] == '#')
 			flags->hash = 2;
-		i++;		
+		i++;
 	}
 	if (s[i] == 'X')
 		flags->big_x = 1;
@@ -65,7 +72,7 @@ static int	detect_flags(t_obj *flags, const char *s, int i)
 	return (i);
 }
 
-static t_obj *set_to_zero(t_obj *ls)
+static t_obj	*set_to_zero(t_obj *ls)
 {
 	ls->wdt = 0;
 	ls->prc = 0;
@@ -82,9 +89,9 @@ static t_obj *set_to_zero(t_obj *ls)
 
 int	ft_printf(const char *str, ...)
 {
-	t_obj *flags;
-	int i;
-	int count;
+	t_obj	*flags;
+	int		i;
+	int		count;
 
 	count = 0;
 	flags = (t_obj *)malloc(sizeof(t_obj));
