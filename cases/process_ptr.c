@@ -3,8 +3,8 @@
 
 void	printf_ptr_nil(t_obj *flags)
 {
-	flags->count += 5;
-	ft_putstr_fd("(nil)", 1);
+	flags->count += 3;
+	ft_putstr_fd("0x0", 1);
 	return ;
 }
 
